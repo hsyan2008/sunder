@@ -1,0 +1,44 @@
+title = "sunder"
+
+[log]
+goid = true
+file="/opt/log/sunder.log"
+level="debug"
+console=true
+type = "roll"
+maxnum = 10
+size = 1
+unit = "GB"
+
+#第一个配置
+[[instances]]
+name = "redmaple"
+bind = ":13306"
+enabled = true
+balance = ""#平衡策略
+maxIdle=6       #定时检查，超过的会被close，数字建议为读的host数量*2的整数倍
+maxCount=100     #创建的时候会检查，超过数量限制，会打印error，但不会影响业务，除非db做了限制
+keepalive=3600
+    #帐号test
+    [instances.accounts.test]
+    password="test"
+    readOnly=false
+    #帐号test1
+    [instances.accounts.test1]
+    password="test1"
+    readOnly=true
+
+    [instances.write]
+    addr = "127.0.0.1:3306"
+    username = "root"
+    password = "jackking"
+    
+    [[instances.reads]]
+    addr = "127.0.0.1:3306"
+    username = "root"
+    password = "jackking"
+    
+    [[instances.reads]]
+    addr = "127.0.0.1:3306"
+    username = "root"
+    password = "jackking"
